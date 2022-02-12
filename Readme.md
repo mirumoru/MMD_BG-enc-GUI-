@@ -1,6 +1,6 @@
 ## MMD_BG-enc(GUI)
 ### 『mp4からMMDの背景で読み込めるaviに変換するGUI』v1.0(β1.3) 
-#### [Downloads(ダウンロード)>>](https://bowlroll.net/file/239319)  
+#### [Downloads(ダウンロード)>>](https://bowlroll.net/file/)  
 雑な所がありますが許していただけると幸いです。  
 
 このバッチファイルはhttps://jbjbgame.com/post-5749/ ＆ https://jbjbgame.com/post-5981/ を  
