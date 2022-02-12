@@ -1,0 +1,18 @@
+﻿<Window x:Class="MMD_enc3.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MMD_enc3"
+        mc:Ignorable="d"
+        Title="MMD-encGUI" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="ファイル選択" Content="変換(デコード)開始" HorizontalAlignment="Left" Margin="581,158,0,0" VerticalAlignment="Top" Height="44" Width="164" Click="button1_Click"/>
+        <TextBox x:Name="TextBox_1" HorizontalAlignment="Left" Margin="134,169,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="407" Height="22"/>
+        <Button x:Name="バージョン" Content="バージョン情報" HorizontalAlignment="Left" Margin="655,369,0,0" VerticalAlignment="Top" Height="29" Width="90" Click="version_Click"/>
+
+    </Grid>
+</Window>
