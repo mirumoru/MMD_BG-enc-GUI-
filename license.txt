@@ -1,4 +1,4 @@
-《MMD_BG-encの利用にあたって》
+《MMD_BG-enc(GUI)の利用にあたって》
 
 
 MMD_BG-encを使用して発生した損害,損失,などは
