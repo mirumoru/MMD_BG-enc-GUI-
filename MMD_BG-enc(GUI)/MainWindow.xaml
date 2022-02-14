@@ -1,18 +1,24 @@
-﻿<Window x:Class="MMD_enc3.MainWindow"
+﻿<Window x:Name="MMDEnc_GUI" x:Class="MMD_enc3.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MMD_enc3"
         mc:Ignorable="d"
-        Title="MMD-encGUI" Height="450" Width="800">
-    <Grid>
+        Title="MMD-encGUI" Height="353" Width="801">
+    <Grid x:Name="Grid" Margin="0,0,0,-16">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="800"/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="ファイル選択" Content="変換(デコード)開始" HorizontalAlignment="Left" Margin="581,158,0,0" VerticalAlignment="Top" Height="44" Width="164" Click="button1_Click"/>
-        <TextBox x:Name="TextBox_1" HorizontalAlignment="Left" Margin="134,169,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="407" Height="22"/>
-        <Button x:Name="バージョン" Content="バージョン情報" HorizontalAlignment="Left" Margin="655,369,0,0" VerticalAlignment="Top" Height="29" Width="90" Click="version_Click"/>
+        <Button x:Name="ファイル選択" Content="変換(デコード)開始" Margin="0,84,58,0" Click="button1_Click" Height="44" VerticalAlignment="Top" HorizontalAlignment="Right" Width="161"/>
+        <TextBox x:Name="TextBox_1" Margin="0,95,253,0" TextWrapping="Wrap" HorizontalAlignment="Right" Width="404" Height="22" VerticalAlignment="Top" d:IsLocked="True"/>
+        <Button x:Name="バージョン" Content="バージョン情報" Margin="0,234,95,0" Click="version_Click" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Width="87"/>
+        <ComboBox x:Name="Enccombo" Margin="0,164,0,0" RenderTransformOrigin="0.471,-3.101" HorizontalAlignment="Center" Width="160" Height="22" VerticalAlignment="Top" d:IsLocked="True"/>
+        <Label x:Name="Enctype" Content="コーディング設定：" Margin="225,162,0,0" HorizontalAlignment="Left" Width="95" Height="26" VerticalAlignment="Top"/>
+        <Label x:Name="Exp" Content="コーディング設定の説明：&#xD;&#xA;rawvideoはCPUデコードです。&#xD;&#xA;h264_nvencはNVIDIAGPUデコードです。&#xD;&#xA;h264_qsvはIntelGPUデコードです。" Margin="0,195,320,0" Height="78" VerticalAlignment="Top" HorizontalAlignment="Right" Width="260"/>
+        <Button x:Name="exp" Content="エクスプローラーを開く" HorizontalAlignment="Left" Margin="596,178,0,0" VerticalAlignment="Top" Width="131" Click="exp_Click" RenderTransformOrigin="0.548,-1.802"/>
+        <Label Content="対象パス：" HorizontalAlignment="Left" Margin="79,93,0,0" VerticalAlignment="Top" Width="64" RenderTransformOrigin="0.638,0.41"/>
+
 
     </Grid>
 </Window>
