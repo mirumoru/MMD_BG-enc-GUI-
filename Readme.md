@@ -1,5 +1,5 @@
 ## MMD_BG-enc(GUI)
-### 『mp4からMMDの背景で読み込めるaviに変換するexe』v1.0(β1.3) 
+### 『mp4からMMDの背景で読み込めるaviに変換するexe』v1.1(β1.4) 
 #### [Downloads(ダウンロード)>>](https://bowlroll.net/file/271835)  
 雑な所がありますが許していただけると幸いです。  
 
