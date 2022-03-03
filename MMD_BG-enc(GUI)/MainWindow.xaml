@@ -5,19 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MMD_enc3"
         mc:Ignorable="d"
-        Title="MMD-encGUI" Height="353" Width="801">
-    <Grid x:Name="Grid" Margin="0,0,0,-16">
+        Title="MMD-encGUI" Height="353" Width="604">
+    <Grid x:Name="Grid" Margin="0,0,1,-16">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="800"/>
+            <ColumnDefinition Width="647"/>
+            <ColumnDefinition Width="1"/>
+            <ColumnDefinition Width="152"/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="ファイル選択" Content="変換(デコード)開始" Margin="0,84,58,0" Click="button1_Click" Height="44" VerticalAlignment="Top" HorizontalAlignment="Right" Width="161"/>
-        <TextBox x:Name="TextBox_1" Margin="0,95,253,0" TextWrapping="Wrap" HorizontalAlignment="Right" Width="404" Height="22" VerticalAlignment="Top" d:IsLocked="True"/>
-        <Button x:Name="バージョン" Content="バージョン情報" Margin="0,234,95,0" Click="version_Click" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Width="87"/>
-        <ComboBox x:Name="Enccombo" Margin="0,164,0,0" RenderTransformOrigin="0.471,-3.101" HorizontalAlignment="Center" Width="160" Height="22" VerticalAlignment="Top" d:IsLocked="True"/>
-        <Label x:Name="Enctype" Content="コーディング設定：" Margin="225,162,0,0" HorizontalAlignment="Left" Width="95" Height="26" VerticalAlignment="Top"/>
-        <Label x:Name="Exp" Content="コーディング設定の説明：&#xD;&#xA;rawvideoはCPUデコードです。&#xD;&#xA;h264_nvencはNVIDIAGPUデコードです。&#xD;&#xA;h264_qsvはIntelGPUデコードです。" Margin="0,195,320,0" Height="78" VerticalAlignment="Top" HorizontalAlignment="Right" Width="260"/>
-        <Button x:Name="exp" Content="エクスプローラーを開く" HorizontalAlignment="Left" Margin="596,178,0,0" VerticalAlignment="Top" Width="131" Click="exp_Click" RenderTransformOrigin="0.548,-1.802"/>
-        <Label Content="対象パス：" HorizontalAlignment="Left" Margin="79,93,0,0" VerticalAlignment="Top" Width="64" RenderTransformOrigin="0.638,0.41"/>
+        <Button x:Name="ffmpeg_go" Content="ffmpeg変換(デコード)開始" Margin="0,108,109,0" Click="button1_Click" Height="35" VerticalAlignment="Top" HorizontalAlignment="Right" Width="138"/>
+        <TextBox x:Name="TextBox_1" Margin="0,61,0,0" TextWrapping="Wrap" HorizontalAlignment="Center" Width="404" Height="22" VerticalAlignment="Top"/>
+        <Button x:Name="バージョン" Content="バージョン情報" Margin="0,255,164,0" Click="version_Click" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Width="82" RenderTransformOrigin="-0.012,0.708"/>
+        <ComboBox x:Name="Enccombo" Margin="184,102,0,0" RenderTransformOrigin="0.471,-3.101" HorizontalAlignment="Left" Width="160" Height="22" VerticalAlignment="Top"/>
+        <Label x:Name="Enctype" Content="ffmpegコーディング設定：" Margin="48,100,0,0" HorizontalAlignment="Left" Width="131" Height="26" VerticalAlignment="Top"/>
+        <Label x:Name="Exp" Content="コーディング設定の説明：&#xA;rawvideoはCPUデコードです。&#xA;h264_nvencはNVIDIAGPUデコードです。&#xA;h264_qsvはIntelGPUデコードです。&#xD;&#xA;これはffmpegのみ適用されます。" Margin="48,134,0,0" Height="92" VerticalAlignment="Top" HorizontalAlignment="Left" Width="260" RenderTransformOrigin="0.513,0.751"/>
+        <Button x:Name="exp" Content="Explorerを開く" HorizontalAlignment="Left" Margin="400,222,0,0" VerticalAlignment="Top" Width="83" Click="exp_Click" RenderTransformOrigin="0.548,-1.802" Height="20"/>
+        <Label Content="パス：" HorizontalAlignment="Left" Margin="84,59,0,0" VerticalAlignment="Top" Width="38" RenderTransformOrigin="0.638,0.41" Height="26"/>
+        <Border x:Name="C_b" BorderBrush="Black" BorderThickness="1" Margin="40,93,283,0" Height="139" VerticalAlignment="Top"/>
+        <Border x:Name="D_b" BorderBrush="Black" BorderThickness="1" Height="192" VerticalAlignment="Top" HorizontalAlignment="Left" Width="170" Margin="387,93,0,0"/>
+        <Button x:Name="NVE_enc" Content="NVEnc変換(デコード)開始" HorizontalAlignment="Left" Margin="398,164,0,0" VerticalAlignment="Top" Height="32" Width="140" Click="NVE_enc_Click"/>
 
 
     </Grid>
