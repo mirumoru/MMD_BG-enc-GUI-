@@ -34,14 +34,23 @@ namespace MMD_enc3
             Enccombo.Items.Add("rawvideo");
             Enccombo.Items.Add("h264_nvenc");
             Enccombo.Items.Add("h264_qsv");
+
             //comboBoxのデフォルト設定
             Enccombo.SelectedIndex = 0;
 
             // テキストボックスのセット
             TextBox_1.Text = "ここにパスが入力されます";
+            YT_pas.Text = "違法動画のダウンロード禁止です。";
+            saizu_BT.Text = "";
+            saizu_BH.Text = "";
+
+            // チェックボックスの制御
+            DataContext = new ViewModel();
+            
 
         }
 
+        
 
 
         // ファイルを開くダイアログボックスを表示		 
@@ -108,11 +117,11 @@ namespace MMD_enc3
             }
             else if (dialog3.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
             {
-                Console.WriteLine("キャンセルボタンが押されました。");
+                Console.WriteLine("エラーが発生しました。");
             }
             dialog3.Dispose();
 
-
+            
             //コモンズ設定
             var sb = new StringBuilder();
             sb.AppendLine(Enccombo.Text);
@@ -122,37 +131,74 @@ namespace MMD_enc3
             string output = dialog2.FileName;
             string vcodec = Enccombo.Text;
             string muoutput = dialog3.FileName;
+            string saizu = saizu_BH.Text +"*"+ saizu_BT.Text;
 
-            // 動画ffmpegのコマンドライン
-            var arguments = string.Format("-i \"{0}\" -r 30 -b:v 1500K -vcodec \"{1}\" -y -an \"{2}\"", input, vcodec, output);
-
-            // 音声ffmpegのコマンドライン
-            var arguments2 = string.Format("-i \"{0}\" -sample_fmt s16 -ar 48000 -y \"{1}\"", input, muoutput);
-
-            // ffmpegの実行
-            var process = Process.Start(new ProcessStartInfo("Tool/ffmpeg.exe", arguments)
-
+            // チェックボックスが選択されているか
+            if ((bool)saizu_CheckBox.IsChecked) 
             {
-                CreateNoWindow = false,
-                UseShellExecute = false,
-            });
+                // 動画ffmpegのコマンドライン
+                var arguments = string.Format("-i \"{0}\" -s \"{1}\" -r 30 -b:v 1500K -vcodec \"{2}\" -y -an \"{3}\"", input, saizu, vcodec, output);
 
-            process.WaitForExit();
+                // 音声ffmpegのコマンドライン
+                var arguments2 = string.Format("-i \"{0}\" -sample_fmt s16 -ar 48000 -y \"{1}\"", input, muoutput);
 
-            var process2 = Process.Start(new ProcessStartInfo("Tool/ffmpeg.exe", arguments2)
+                // ffmpegの実行
+                var process = Process.Start(new ProcessStartInfo("Tool/ffmpeg.exe", arguments)
 
+                {
+                    CreateNoWindow = false,
+                    UseShellExecute = false,
+                });
+
+                process.WaitForExit();
+
+                var process2 = Process.Start(new ProcessStartInfo("Tool/ffmpeg.exe", arguments2)
+
+                {
+                    CreateNoWindow = false,
+                    UseShellExecute = false,
+                });
+
+                process2.WaitForExit();
+
+                MessageBox.Show("変換(デコード)が終了しました。", "通知");
+
+            }
+            else
             {
-                CreateNoWindow = false,
-                UseShellExecute = false,
-            });
-
-            process2.WaitForExit();
-
-            MessageBox.Show("変換(デコード)が終了しました。", "通知");
 
 
-            //エクスプローラーで出力ファイルを開く
-            string PathString = output;
+                // 動画ffmpegのコマンドライン
+                var arguments = string.Format("-i \"{0}\" -r 30 -b:v 1500K -vcodec \"{1}\" -y -an \"{2}\"", input, vcodec, output);
+
+                // 音声ffmpegのコマンドライン
+                var arguments2 = string.Format("-i \"{0}\" -sample_fmt s16 -ar 48000 -y \"{1}\"", input, muoutput);
+
+                // ffmpegの実行
+                var process = Process.Start(new ProcessStartInfo("Tool/ffmpeg.exe", arguments)
+
+                {
+                    CreateNoWindow = false,
+                    UseShellExecute = false,
+                });
+
+                process.WaitForExit();
+
+                var process2 = Process.Start(new ProcessStartInfo("Tool/ffmpeg.exe", arguments2)
+
+                {
+                    CreateNoWindow = false,
+                    UseShellExecute = false,
+                });
+
+                process2.WaitForExit();
+
+                MessageBox.Show("変換(デコード)が終了しました。", "通知");
+
+            }
+
+        //エクスプローラーで出力ファイルを開く
+        string PathString = output;
             string dirName = System.IO.Path.GetDirectoryName(PathString);
             PathString += dirName + "\r\n";
             System.Diagnostics.Process.Start("explorer.exe", dirName);
@@ -160,14 +206,11 @@ namespace MMD_enc3
             // テキストボックスのセット
             TextBox_1.Text = dirName;
 
-
-
-
         }
 
         private void version_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("MMD_BC-encGUIv1.2(β1.5)\nby mirumoru", "バージョン情報");
+            MessageBox.Show("MMD_BC-encGUIv1.3(β1.6)\nby mirumoru", "バージョン情報");
         }
 
 
@@ -261,9 +304,42 @@ namespace MMD_enc3
             string input = dialog.FileName;
             string output = dialog2.FileName;
             string muoutput = dialog3.FileName;
+            string saizu2 = saizu_BH.Text + "x" + saizu_BT.Text;
+
+            if ((bool)saizu_CheckBox.IsChecked)
+            {
+                // 動画NVEncのコマンドライン
+                var arguments = string.Format("--fps 30 --cbr 1500 --output-res \"{0}\" --avsync vfr -i \"{1}\" -o \"{2}\"", saizu2 , input, output);
+
+                // NVEncの実行
+                var process = Process.Start(new ProcessStartInfo("Tool/NVEncC64.exe", arguments)
+
+                {
+                    CreateNoWindow = false,
+                    UseShellExecute = false,
+                });
+                process.WaitForExit();
+
+                // 音声ffmpegのコマンドライン
+                var arguments2 = string.Format("-i \"{0}\" -sample_fmt s16 -ar 48000 -y \"{1}\"", input, muoutput);
+
+                // ffmpegの実行
+                var process2 = Process.Start(new ProcessStartInfo("Tool/ffmpeg.exe", arguments2)
+
+                {
+                    CreateNoWindow = false,
+                    UseShellExecute = false,
+                });
+
+                process2.WaitForExit();
+
+                MessageBox.Show("変換(デコード)が終了しました。", "通知");
+            }
+
+            else { 
 
             // 動画NVEncのコマンドライン
-            var arguments = string.Format("--fps 30 --cbr 1500 --avsync vfr -i \"{0}\" -o \"{1}\"", input, output);
+                var arguments = string.Format("--fps 30 --cbr 1500 --avsync vfr -i \"{0}\" -o \"{1}\"", input, output);
 
             // NVEncの実行
             var process = Process.Start(new ProcessStartInfo("Tool/NVEncC64.exe", arguments)
@@ -289,6 +365,8 @@ namespace MMD_enc3
 
             MessageBox.Show("変換(デコード)が終了しました。", "通知");
 
+            }
+
             //エクスプローラーで出力ファイルを開く
             string PathString = output;
             string dirName = System.IO.Path.GetDirectoryName(PathString);
@@ -297,6 +375,102 @@ namespace MMD_enc3
 
             // テキストボックスのセット
             TextBox_1.Text = dirName;
+        }
+
+
+
+            //ここからYTのコマンドライン
+        private void YTdl_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("動画の保存先を設定して下さい。", "説明");
+
+            // 保存ダイアログ設定
+            var dialog4 = new System.Windows.Forms.SaveFileDialog();
+
+            // ファイルの設定
+            dialog4.Filter = "動画ファイル (*.mp4)|*.mp4|全てのファイル (*.*)|*.*"; ;
+
+            if (dialog4.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                MessageBox.Show(dialog4.FileName, "パスを表示");
+                MessageBox.Show("ダウンロードを開始します。", "通知");
+
+            }
+            else if (dialog4.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
+            {
+                Console.WriteLine("キャンセルボタンが押されました。");
+            }
+            dialog4.Dispose();
+
+
+            //コモンズ設定
+            var sb = new StringBuilder();
+            sb.AppendLine(Enccombo.Text);
+
+            // パスを代入
+            string URL = YT_pas.Text;
+            string output = dialog4.FileName;
+            string muoutput = dialog4.FileName;
+            string saizu2 = saizu_BH.Text + "x" + saizu_BT.Text; //不明
+
+            
+            
+         // yt-dlpのコマンドライン
+          var arguments = string.Format("-f bv[ext=mp4]+ba[ext=m4a] --merge-output-format mp4 -o \"{0}\" \"{1}\"", output, URL);
+
+         // yt-dlpの実行
+          var process = Process.Start(new ProcessStartInfo("Tool/yt-dlp.exe", arguments)
+
+         　{
+              CreateNoWindow = false,
+              UseShellExecute = false,
+           });
+         process.WaitForExit();
+
+            //エクスプローラーで出力ファイルを開く
+            string PathString = output;
+            string dirName = System.IO.Path.GetDirectoryName(PathString);
+            PathString += dirName + "\r\n";
+            System.Diagnostics.Process.Start("explorer.exe", dirName);
+
+            // テキストボックスのセット
+            TextBox_1.Text = dirName;
+        }
+
+
+        private void saizu_Checked(object sender, RoutedEventArgs e)
+        {
+            //空白
+        }
+        
+
+        private void saizu_BT_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            //空白
+        }
+
+        private void saizu_BH_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            //空白
+        }
+
+        private void LIcense_Click(object sender, RoutedEventArgs e)
+        {
+            var process = Process.Start(new ProcessStartInfo("notepad.exe",@"""Tool/license.txt"""));
+            process.WaitForExit();
+        }
+
+        private void Readme_Click(object sender, RoutedEventArgs e)
+        {
+            var process = Process.Start(new ProcessStartInfo("notepad.exe", @"""Readme.txt"""));
+            process.WaitForExit();
+        }
+
+        
+
+        private void YT_dl_Checked(object sender, RoutedEventArgs e)
+        {
+
         }
     }
     

@@ -5,24 +5,43 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MMD_enc3"
         mc:Ignorable="d"
-        Title="MMD-encGUI" Height="353" Width="604">
-    <Grid x:Name="Grid" Margin="0,0,1,-16">
+        Title="MMD-encGUI" Height="444" Width="614">
+    <Grid x:Name="Grid" Margin="0,0,0,-16">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="647"/>
             <ColumnDefinition Width="1"/>
             <ColumnDefinition Width="152"/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="ffmpeg_go" Content="ffmpeg変換(デコード)開始" Margin="0,108,109,0" Click="button1_Click" Height="35" VerticalAlignment="Top" HorizontalAlignment="Right" Width="138"/>
-        <TextBox x:Name="TextBox_1" Margin="0,61,0,0" TextWrapping="Wrap" HorizontalAlignment="Center" Width="404" Height="22" VerticalAlignment="Top"/>
-        <Button x:Name="バージョン" Content="バージョン情報" Margin="0,255,164,0" Click="version_Click" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Width="82" RenderTransformOrigin="-0.012,0.708"/>
-        <ComboBox x:Name="Enccombo" Margin="184,102,0,0" RenderTransformOrigin="0.471,-3.101" HorizontalAlignment="Left" Width="160" Height="22" VerticalAlignment="Top"/>
-        <Label x:Name="Enctype" Content="ffmpegコーディング設定：" Margin="48,100,0,0" HorizontalAlignment="Left" Width="131" Height="26" VerticalAlignment="Top"/>
-        <Label x:Name="Exp" Content="コーディング設定の説明：&#xA;rawvideoはCPUデコードです。&#xA;h264_nvencはNVIDIAGPUデコードです。&#xA;h264_qsvはIntelGPUデコードです。&#xD;&#xA;これはffmpegのみ適用されます。" Margin="48,134,0,0" Height="92" VerticalAlignment="Top" HorizontalAlignment="Left" Width="260" RenderTransformOrigin="0.513,0.751"/>
-        <Button x:Name="exp" Content="Explorerを開く" HorizontalAlignment="Left" Margin="400,222,0,0" VerticalAlignment="Top" Width="83" Click="exp_Click" RenderTransformOrigin="0.548,-1.802" Height="20"/>
-        <Label Content="パス：" HorizontalAlignment="Left" Margin="84,59,0,0" VerticalAlignment="Top" Width="38" RenderTransformOrigin="0.638,0.41" Height="26"/>
-        <Border x:Name="C_b" BorderBrush="Black" BorderThickness="1" Margin="40,93,283,0" Height="139" VerticalAlignment="Top"/>
-        <Border x:Name="D_b" BorderBrush="Black" BorderThickness="1" Height="192" VerticalAlignment="Top" HorizontalAlignment="Left" Width="170" Margin="387,93,0,0"/>
-        <Button x:Name="NVE_enc" Content="NVEnc変換(デコード)開始" HorizontalAlignment="Left" Margin="398,164,0,0" VerticalAlignment="Top" Height="32" Width="140" Click="NVE_enc_Click"/>
+        <Button x:Name="ffmpeg_go" Content="ffmpeg変換(エンコード)開始" Margin="0,66,70,0" Click="button1_Click" Height="36" VerticalAlignment="Top" HorizontalAlignment="Right" Width="179"/>
+        <TextBox x:Name="TextBox_1" Margin="100,25,0,0" TextWrapping="Wrap" HorizontalAlignment="Left" Width="486" Height="22" VerticalAlignment="Top"/>
+        <Button x:Name="バージョン" Content="バージョン情報" Margin="492,195,0,0" Click="version_Click" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="85" RenderTransformOrigin="-0.012,0.708"/>
+        <ComboBox x:Name="Enccombo" Margin="193,71,0,0" RenderTransformOrigin="0.471,-3.101" HorizontalAlignment="Left" Width="160" Height="22" VerticalAlignment="Top"/>
+        <Label x:Name="Enctype" Content="ffmpegコーディング設定：" Margin="62,71,0,0" HorizontalAlignment="Left" Width="131" Height="26" VerticalAlignment="Top"/>
+        <Label x:Name="Exp" Content="コーディング設定の説明：&#xA;rawvideoはCPUデコードです。&#xA;h264_nvencはNVIDIAGPUデコードです。&#xA;h264_qsvはIntelGPUデコードです。&#xD;&#xA;これはffmpegのみ適用されます。" Margin="64,104,0,0" Height="92" VerticalAlignment="Top" HorizontalAlignment="Left" Width="260" RenderTransformOrigin="0.513,0.751"/>
+        <Button x:Name="exp" Content="Explorerを開く" HorizontalAlignment="Left" Margin="398,195,0,0" VerticalAlignment="Top" Width="88" Click="exp_Click" RenderTransformOrigin="0.548,-1.802" Height="20"/>
+        <Label x:Name="pas" Content="パス：" HorizontalAlignment="Left" Margin="62,23,0,0" VerticalAlignment="Top" Width="38" RenderTransformOrigin="0.638,0.41" Height="26"/>
+        <Border x:Name="C_b" BorderBrush="Black" BorderThickness="1" Margin="62,58,283,0" Height="138" VerticalAlignment="Top">
+            <Border BorderBrush="Black" BorderThickness="1" Margin="-1,140,-1,-79">
+                <TextBlock x:Name="saizu_H" TextWrapping="Wrap" Margin="17,43,257,15" RenderTransformOrigin="0.992,0.001"><Run Language="ja-jp" Text="幅："/></TextBlock>
+            </Border>
+        </Border>
+        <Border x:Name="D_b" BorderBrush="Black" BorderThickness="1" Height="110" VerticalAlignment="Top" HorizontalAlignment="Left" Width="199" Margin="387,54,0,0">
+            <Button x:Name="NVE_enc" Content="NVEnc変換(エンコード)開始" HorizontalAlignment="Center" VerticalAlignment="Top" Height="32" Width="180" Click="NVE_enc_Click" Margin="0,67,0,0"/>
+        </Border>
+        <CheckBox x:Name="saizu_CheckBox" Content="サイズの変更" HorizontalAlignment="Left" Margin="75,210,0,0" VerticalAlignment="Top" Checked="saizu_Checked" IsChecked="{Binding IsEdit}"/>
+        <TextBlock x:Name="saizu_T" HorizontalAlignment="Right" Margin="0,242,434,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="ja-jp" Text="高さ："/></TextBlock>
+        <TextBox x:Name="saizu_BT" HorizontalAlignment="Left" Margin="213,242,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="66" TextChanged="saizu_BT_TextChanged" IsEnabled="{Binding IsEdit}"/>
+        <TextBox x:Name="saizu_BH" HorizontalAlignment="Left" Margin="110,242,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="66" RenderTransformOrigin="0.564,0.342" TextChanged="saizu_BH_TextChanged" IsEnabled="{Binding IsEdit}"/>
+        <Button x:Name="LIcense" Content="ライセンス" HorizontalAlignment="Left" Margin="492,236,0,0" VerticalAlignment="Top" Click="LIcense_Click" Width="85"/>
+        <Button x:Name="Readme" Content="Readme" HorizontalAlignment="Left" Margin="400,236,0,0" VerticalAlignment="Top" Width="86" Click="Readme_Click"/>
+        <Border x:Name="sonota" BorderBrush="Black" BorderThickness="1" Margin="387,177,0,0" Height="96" VerticalAlignment="Top" HorizontalAlignment="Left" Width="199"/>
+        
+        
+        <TextBlock x:Name="YT_URL" HorizontalAlignment="Left" Margin="64,347,0,0" TextWrapping="Wrap" Text="動画URL:" VerticalAlignment="Top" RenderTransformOrigin="0.544,1.271"/>
+        <TextBox x:Name="YT_pas" HorizontalAlignment="Left" Margin="118,346,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="450" IsEnabled="{Binding IsEdit2}"/>
+        <Button x:Name="YTdl" Content="動画ダウンロード" HorizontalAlignment="Left" Margin="478,303,0,0" VerticalAlignment="Top" Click="YTdl_Click" Width="90" Height="27" IsEnabled="{Binding IsEdit2}"/>
+        <CheckBox x:Name="YT_dl" Content="外部から動画をダウンロードする" HorizontalAlignment="Left" Margin="72,326,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.622,0.438" Checked="YT_dl_Checked" Width="174" Height="15" IsChecked="{Binding IsEdit2}"/>
+        <Label x:Name="dl_not" Content="外部から動画をダウンロードする場合、著作権に注意してください。&#xD;&#xA;また、このソフトによるいかなる損害についても作者は一切責任を負いません。" HorizontalAlignment="Left" Margin="64,278,0,0" VerticalAlignment="Top" Width="378" Height="43"/>
 
 
     </Grid>
